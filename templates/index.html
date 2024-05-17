@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navmenu">
+        <center><h1>FACT 'R' FAKE</h1></center>
+    </div>
+    <div class="container">
+        <img src="{{ url_for('static', filename='imagepng.png') }}" alt="Example Image">
+    <a href="/home"><button>Predict</button></a>
+    </div>
+</body>
+</html>

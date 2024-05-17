@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fake News Detection</h1>
+    <form action="/predict" method="post">
+        <label for="news_article">Enter news text:</label><br>
+        <textarea id="news_article" name="news_article" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if prediction_text %}
+        <center><h2 id="result">This is fake</h2></center>
+    {% endif %}
+</body>
+<script>
+    const item = document.getElementById('result');
+    if(item.innerText == 'This is fake'){
+        item.style.backgroundColor = 'red'
+    }else{
+        item.style.backgroundColor = 'green'
+    }
+</script>
+</html>

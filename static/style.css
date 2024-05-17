@@ -1,0 +1,41 @@
+.navmenu{
+    background: blue;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #FAFAFA;
+}
+
+.container button{
+    padding: 15px;
+    background: green;
+    border: none;
+    font-size: larger;
+    font-weight: 700;
+    border-radius: 10px;
+    outline: 2px solid orange;
+    cursor: pointer;
+    right: 200px;
+    position: absolute;
+    top: 250px;
+    transform: scale(2);
+    &:hover{
+        transform: scale(2.5);
+    }
+    transition: .5s;
+}
+
+.container img{
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    width: 700px;
+}
+
+#result{
+    color: white;
+    text-align: center;
+    width: fit-content;
+    padding: 8px;
+}
