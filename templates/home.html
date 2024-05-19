@@ -8,29 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body style="background: url(../static/newspaper.jpg) no-repeat; background-size: cover;">
-        <center style="position: absolute; left: 35%; top: 20%;">
+        <center style="position: absolute; left: 36%; top: 20%;">
             <h1>Fake News Detection</h1>
-        <form action="/predict" method="post">
-            <center><textarea id="news_article" name="news_article" rows="4" cols="50" placeholder="Enter the title of the article"></textarea><br><br>
+        <form action="/predict" method="post" onsubmit=handlesubmit(e) id="newsForm">
+            <center><textarea id="news_article" name="news_article" rows="4" cols="50" placeholder="Enter the title of the article" required></textarea><br><br>
                 <button id="Submit" onclick="showResult()">Submit</button></center>
         </form>
         </center>
          <i class="fa fa-search" aria-hidden="true" id="search" style="display: none;"></i>
     {% if prediction_text %}
-        <center><h2 id="result" style="display: none;">This is fake</h2></center>
+        <center><h2 id="result">{{prediction_text}}</h2></center>
     {% endif %}
 </body>
 <script>
     const item = document.getElementById('result');
-    const load = document.getElementById('search');
-    function showResult(){
+    document.getElementById('newsForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const load = document.getElementById('search');
         load.style.display = 'block';
         setTimeout(() => {
-            load.style.display = 'none';
-            item.style.display = 'block';
+            event.target.submit();
         }, 5000);
-    }
-    if(item.innerText == 'This is fake'){
+    });
+    if(item.innerText == 'The news is Fake'){
         item.style.backgroundColor = 'red'
     }else{
         item.style.backgroundColor = 'green'

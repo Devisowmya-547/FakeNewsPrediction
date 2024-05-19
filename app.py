@@ -12,6 +12,7 @@ app = Flask(__name__)
 current_dir = os.path.dirname(__file__)
 # Construct the path to the model file
 model_path = os.path.join(current_dir, 'log_reg.pkl')
+vectorizer_path = os.path.join(current_dir, 'vectorizer.pkl')
 
 # Load the pre-trained model
 with open(model_path, 'rb') as file:
@@ -20,7 +21,7 @@ with open(model_path, 'rb') as file:
 port_stem = PorterStemmer()
 
 def stemming(content):
-    stemmed_content = re.sub('[^a-zA-Z]',' ',content)
+    stemmed_content = re.sub('[^a-zA-Z]', ' ', content)
     stemmed_content = stemmed_content.lower()
     stemmed_content = stemmed_content.split()
     stemmed_content = [port_stem.stem(word) for word in stemmed_content if not word in stopwords.words('english')]
@@ -42,14 +43,14 @@ def predict():
         stemmed_article = stemming(news_article)
         
         # Load the vectorizer used during training
-        with open('vectorizer.pkl', 'rb') as file:
+        with open(vectorizer_path, 'rb') as file:
             vectorizer = pickle.load(file)
         
         article_vectorized = vectorizer.transform([stemmed_article])
         prediction = model.predict(article_vectorized)
 
         if prediction[0] == 0:
-            result = 'Real'
+            result = 'Fact'
         else:
             result = 'Fake'
 

@@ -64,6 +64,11 @@ i{
     animation: searching 5s ease-in-out infinite;
 }
 
+#result{
+    position: relative;
+    top: 380px;
+}
+
 @keyframes searching {
     0%, 100%{ 
         top: 150px;
