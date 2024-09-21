@@ -1,9 +1,9 @@
+import os
 from flask import Flask, render_template, request
 import pickle
 from nltk.corpus import stopwords 
 from nltk.stem.porter import PorterStemmer 
 import re
-import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = Flask(__name__)
@@ -49,12 +49,11 @@ def predict():
         article_vectorized = vectorizer.transform([stemmed_article])
         prediction = model.predict(article_vectorized)
 
-        if prediction[0] == 0:
-            result = 'Fact'
-        else:
-            result = 'Fake'
+        result = 'Fact' if prediction[0] == 0 else 'Fake'
 
         return render_template('home.html', prediction_text='The news is {}'.format(result))
 
 if __name__ == '__main__':
-    app.run()
+    # Use the port specified by the environment variable or fallback to 5000
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
